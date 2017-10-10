@@ -1,8 +1,8 @@
+# Haked together at/for MakeZürich 17.
+# Based on:
 # A micro:bit Firefly.
 # By Nicholas H.Tollervey. Released to the public domain.
-import radio
-import random
-import music
+import radio, music
 from microbit import *
 # Create the "flash" animation frames. Can you work out how it's done?
 def flash_image(image):
