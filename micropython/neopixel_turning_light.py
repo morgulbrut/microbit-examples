@@ -2,11 +2,12 @@
 from microbit import *
 import neopixel
 
+no_of_pixels = 8
 # Setup the Neopixel strip on pin0 with a length of 8 pixels
-np = neopixel.NeoPixel(pin2, 10)
+np = neopixel.NeoPixel(pin5, no_of_pixels)
 
 # Fills a strip with a colour
-def fade_strip(begin,end,delay=20,colour=(0,0,0)):
+def fade_strip(begin,end,delay=20,colour=(0,0,0),accel=0):
     if begin < end: 
         step = 1
     else: 
@@ -17,16 +18,15 @@ def fade_strip(begin,end,delay=20,colour=(0,0,0)):
     for pixel_id in range(begin,end,step):
         np[pixel_id] = colour
         np.show()
-        sleep(delay)
+        sleep(10000/accel)
         
 while True:
-    if accelerometer.get_x() < -400:
-        print('left')
-        fade_strip(0,10,20,(255,200,0))
-        fade_strip(0,10,20)
-    if accelerometer.get_x() > 400:
-        print('right')
-        fade_strip(10,0,20,(255,200,0))
-        fade_strip(10,0,20)
+    accel = accelerometer.get_x()
+    if accel > 400:
+        fade_strip(0,no_of_pixels,colour=(255,200,0),accel=accel)
+        fade_strip(0,no_of_pixels,accel=accel)
+    if accel < -400:
+        fade_strip(no_of_pixels,0,colour=(255,200,0),accel=-accel)
+        fade_strip(no_of_pixels,0,accel=-accel)
     
     np.clear()
