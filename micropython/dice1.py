@@ -7,7 +7,7 @@ VALS    = ["Eins",
             "Zwei",
             "Drei",
             "Vier",
-            "Fünf",
+            "Fuenf",
             "Sechs"
            ]
 
